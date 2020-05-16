@@ -229,8 +229,8 @@
                     <div class="row d-flex justify-content-between align-items-center">
                         <div class="col-xl-9 col-lg-8">
                             <div class="footer-copy-right">
-                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                              <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This Website is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">" Kuberan Bank for you!"</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                             </div>
                         </div>
@@ -248,13 +248,44 @@
             </div>
         </div>
         
-         <script>
-  function initFreshChat() {
-    window.fcWidget.init({
-      token: "22c8926a-7f1a-4e61-83e8-095c6307d34e",
-      host: "https://wchat.freshchat.com"
-    });
-  }
+         <div id="custom_fc_button" style="visibility:hidden;">
+  <a id="open_fc_widget" onClick="openWidget()" style="cursor:pointer;"><img id="imageicon" src="assets/img/logo/chatbot.png" /></a>
+</div>
+<script>
+  window.fcSettings = {
+    token: "22c8926a-7f1a-4e61-83e8-095c6307d34e",
+    host: "https://wchat.freshchat.com",
+    config: {
+      headerProperty: {
+        hideChatButton: true
+      }
+    },
+    onInit: function() {
+      window.fcWidget.on("widget:loaded",function() {
+        document.getElementById('custom_fc_button').style.visibility = 'visible';
+        window.fcWidget.on("unreadCount:notify", function(resp) {
+          console.log(resp);
+          test = resp;
+        });
+        window.fcWidget.on("widget:closed", function() {
+          document.getElementById('fc_frame').style.visibility = 'hidden';
+          document.getElementById('open_fc_widget').style.visibility = 'visible';
+        });
+        window.fcWidget.on("widget:opened", function(resp) {
+          document.getElementById('open_fc_widget').style.visibility = 'hidden';
+        });
+      });
+    }
+  };
+  
+  
+  var openWidget = function() {
+    document.getElementById('fc_frame').style.visibility = 'visible';
+    window.fcWidget.open();
+  };
+  
+</script>
+<script src="https://wchat.freshchat.com/js/widget.js" async></script>
   function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"freshchat-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);
 </script>
         <!-- Footer End-->
